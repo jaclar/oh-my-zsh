@@ -2,10 +2,23 @@
 # on two lines for easier vgrepping
 # entry in a nice long thread on the Arch Linux forums: http://bbs.archlinux.org/viewtopic.php?pid=521888#p521888
 PROMPT=$'%{\e[0;34m%}%B┌─[%b%{\e[0m%}%{\e[1;32m%}%n%{\e[1;30m%}@%{\e[0m%}%{\e[0;36m%}%m%{\e[0;34m%}%B]%b%{\e[0m%} - %b%{\e[0;34m%}%B[%b%{\e[0m%}%~%{\e[0;34m%}%B]%b%{\e[0m%} - %{\e[0;34m%}%B[%b%{\e[0;33m%}'%D{"%a, %d. %b, %H:%M"}%b$'%{\e[0;34m%}%B]%b%{\e[0m%}
-%{\e[0;34m%}%B└─%B[%{\e[1;35m%}$%{\e[0;34m%}%B] <$(git_prompt_info)>%{\e[0m%}%b '
+%{\e[0;34m%}%B└─%B[%{\e[1;35m%}$%{\e[0;34m%}%B] $(git_prompt_info)%{\e[0m%}%b '
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
 
-ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ✗%{\e[0;34m%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="<"
+ZSH_THEME_GIT_PROMPT_SUFFIX=">"
+# ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} ✗%{\e[0;34m%}%B"
+ZSH_THEME_GIT_PROMPT_DIRTY=""
 ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+# display exitcode on the right when >0
+return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+
+RPROMPT='${return_code}$(git_prompt_status)%{$reset_color%}  '
+
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%} ✚"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[blue]%} ✹"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✖"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} ➜"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ═"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
