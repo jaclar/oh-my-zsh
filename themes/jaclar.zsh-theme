@@ -1,8 +1,19 @@
 # user, host, full path, and time/date
 # on two lines for easier vgrepping
 # entry in a nice long thread on the Arch Linux forums: http://bbs.archlinux.org/viewtopic.php?pid=521888#p521888
-PROMPT=$'%{\e[0;34m%}%B┌─[%b%{\e[0m%}%{\e[1;32m%}%m%{\e[0;34m%}%B]%b%{\e[0m%} - %b%{\e[0;34m%}%B[%b%{\e[0m%}%~%{\e[0;34m%}%B]%b%{\e[0m%} - %{\e[0;34m%}%B[%b%{\e[0;33m%}'%D{"%a, %d. %b, %H:%M"}%b$'%{\e[0;34m%}%B]%b%{\e[0m%}
-%{\e[0;34m%}%B└─%B[%{\e[1;35m%}$%{\e[0;34m%}%B] $(git_prompt_info)%{\e[0m%}%b'
+
+if [ $UID -eq 0 ]; then
+   CMD="#";
+   COLOR="red"
+   BCOLOR="red"
+else
+   CMD="$";
+   COLOR="magenta"
+fi
+
+
+PROMPT=$'%{\e[0;34m%}%B┌─[%b%{\e[0m%}%{\e[1;32m%}%{$bg[$BCOLOR]%}%m%{\e[0;34m%}%B]%b%{\e[0m%} - %b%{\e[0;34m%}%B[%b%{\e[0m%}%~%{\e[0;34m%}%B]%b%{\e[0m%} - %{\e[0;34m%}%B[%b%{\e[0;33m%}'%D{"%a, %d. %b, %H:%M"}%b$'%{\e[0;34m%}%B]%b%{\e[0m%}
+%{\e[0;34m%}%B└─%B[%{$fg[$COLOR]%}$CMD%{\e[0;34m%}%B] $(git_prompt_info)%{\e[0m%}%b'
 PS2=$' \e[0;34m%}%B>%{\e[0m%}%b '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="<"
